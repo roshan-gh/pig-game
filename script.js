@@ -82,14 +82,14 @@ const holdScore = function() {
 
     if (togglePlayer === true) {
         player1Score.textContent = Number(player1Score.textContent) + player1CurrentScore;
-        if (Number(player1Score.textContent) >= 10) {
+        if (Number(player1Score.textContent) >= 100) {
             player1Win = true;
             winGame(player1Win);
         }
         togglePlayer = switchPlayer();
     } else {
         player2Score.textContent = Number(player2Score.textContent) + player2CurrentScore;
-        if (Number(player2Score.textContent) >= 10) {
+        if (Number(player2Score.textContent) >= 100) {
             player1Win = false;
             winGame(player1Win);
         }
