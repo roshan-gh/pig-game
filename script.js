@@ -10,15 +10,29 @@ let btnNew = document.querySelector('.btn--new');
 // Just game starts
 let player1 = document.querySelector('.player--0');
 let player2 = document.querySelector('.player--1');
-player1Score.textContent = 0;
-player2Score.textContent = 0;
-let player1CurrentScore = 0;
-let player2CurrentScore = 0;
-dice.classList.add('hidden');
-btnNew.classList.add('hidden');
-let togglePlayer = true;
-let choosePlayer = true;
-let player1Win = false;
+let player1CurrentScore, player2CurrentScore;
+let togglePlayer, choosePlayer, player1Win;
+
+//Resets the game
+const newGame = function() {
+    player1Score.textContent = 0;
+    player2Score.textContent = 0;
+    player1CurrentScore = 0;
+    player2CurrentScore = 0;
+    dice.classList.add('hidden');
+    btnNew.classList.add('hidden');
+    togglePlayer = true;
+    choosePlayer = true;
+    player1Win = false;
+    player1.classList.remove('player--winner');
+    player2.classList.remove('player--winner');
+    player2.classList.remove('player--active');
+    player1.classList.add('player--active');
+    btnHold.disabled = false;
+    btnRoll.disabled = false;
+}
+
+newGame();
 
 // Shows the dice with a random score
 const rollDice = function() {
@@ -82,38 +96,19 @@ const holdScore = function() {
 
     if (togglePlayer === true) {
         player1Score.textContent = Number(player1Score.textContent) + player1CurrentScore;
-        if (Number(player1Score.textContent) >= 100) {
+        if (Number(player1Score.textContent) >= 10) {
             player1Win = true;
             winGame(player1Win);
         }
         togglePlayer = switchPlayer();
     } else {
         player2Score.textContent = Number(player2Score.textContent) + player2CurrentScore;
-        if (Number(player2Score.textContent) >= 100) {
+        if (Number(player2Score.textContent) >= 10) {
             player1Win = false;
             winGame(player1Win);
         }
         togglePlayer = switchPlayer();
     }
-}
-
-//Resets the game
-const newGame = function() {
-    player1Score.textContent = 0;
-    player2Score.textContent = 0;
-    let player1CurrentScore = 0;
-    let player2CurrentScore = 0;
-    dice.classList.add('hidden');
-    btnNew.classList.add('hidden');
-    let togglePlayer = true;
-    let choosePlayer = true;
-    let player1Win = false;
-    player1.classList.remove('player--winner');
-    player2.classList.remove('player--winner');
-    player2.classList.remove('player--active');
-    player1.classList.add('player--active');
-    btnHold.disabled = false;
-    btnRoll.disabled = false;
 }
 
 //Click event on the roll the dice button
